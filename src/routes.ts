@@ -1,12 +1,13 @@
 import { Express } from 'express';
-import { createUserHandler } from './controller/user.controller';
+import { createUserHandler,loginUserHandler } from './controller/user.controller';
 import {validate} from "./middleware/validateRequest"
-import { userSchema } from './schema/user.schema';
+import { userSignupSchema,userLoginSchema } from './schema/user.schema';
 
 
 function initRoutes(app:Express):void{
 
-    app.post("/api/user",validate(userSchema),createUserHandler)
+    app.post("/api/signup",validate(userSignupSchema),createUserHandler)
+    app.post("/api/login",validate(userLoginSchema),loginUserHandler)
 
 }
 

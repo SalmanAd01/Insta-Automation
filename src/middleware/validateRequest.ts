@@ -4,7 +4,6 @@ import {Request,Response,NextFunction} from "express"
 
 export const validate = (schema:AnySchema)=> async(req:Request, res:Response,next:NextFunction)=>{
     try{
-        log.info("req--->",req)
         await schema.validate({
             body:req.body,
             params:req.params,

@@ -20,7 +20,6 @@ export function extractStringEnvVar(
     key: keyof NodeJS.ProcessEnv,
 ): string {
     const value = process.env[key];
-    console.log(key);
     if (value === undefined) {
         const message = `The environment variable "${key}" cannot be "undefined".`;
 

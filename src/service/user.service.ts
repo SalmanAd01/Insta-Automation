@@ -17,3 +17,23 @@ export const createUser =async (user:DocumentDefinition<UserDocument>) =>{
     }
 
 }
+export const verifyUser = async (user:DocumentDefinition<Omit<UserDocument,'name'>>) =>{
+    try{
+        const checkEmail= await User.findOne({email:user.email});
+        if(!checkEmail){
+            throw new Error("Email is not Registered");
+        }
+        else{
+            const checkBoth= await checkEmail.comparePassword(user.password);
+            if(!checkBoth){
+                throw new Error("Email and Password is Incorrect");
+            }
+            else{
+                return checkBoth;
+            }
+        }
+    }
+    catch(error){
+        throw new Error(String(error));
+    }
+}
