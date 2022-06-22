@@ -1,9 +1,5 @@
-import {Request,Response} from "express"
+import {Request,Response,NextFunction} from "express"
 import mongoose from "mongoose"
-export type reqRes ={
-    req:Request,
-    res:Response
-}
 
 export interface UserDocument extends mongoose.Document {
     email: string;

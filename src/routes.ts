@@ -1,11 +1,10 @@
 import { Express } from 'express';
-import { reqRes } from './@types';
-
+import { createUserHandler } from './controller/user.controller';
+import {validate} from "./middleware/validateRequest"
+import { userSchema } from './schema/user.schema';
 function initRoutes(app:Express):void{
 
-    app.get("/",({req,res}:reqRes) =>{
-        res.send("Hello")
-    })
+    app.post("/api/user",validate(userSchema),createUserHandler)
 
 }
 
