@@ -1,5 +1,4 @@
 import { omit } from "lodash";
-import { reqRes } from "../@types";
 import log from "../log";
 import { createUser } from "../service/user.service";
 import {Request,Response,NextFunction} from "express"
