@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import {  UserDocument } from "../@types";
 import bcrypt from "bcrypt";
-import config from "config";
+import { extractNumberEnvVar } from "../public/dotenvExtractor";
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
@@ -33,8 +33,8 @@ UserSchema.methods.comparePassword= async function(password: string){
 UserSchema.pre<UserDocument>("save",async function(this:UserDocument,next){
     let user = this;
     if(!user.isModified("password")) return next();
-        
-    const salt = await bcrypt.genSalt(config.get("saltWorkFactor"));
+    const saltLength = extractNumberEnvVar('SALT_LENGTH')   
+    const salt = await bcrypt.genSalt(saltLength);
     const hash = await bcrypt.hashSync(user.password,salt);
 
     user.password = hash;

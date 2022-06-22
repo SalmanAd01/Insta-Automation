@@ -1,9 +1,11 @@
 import express,{Express} from "express"
-import config from "config"
 import routes from "./routes"
 import connectDb from "./db/connect"
-const PORT:number = config.get('port')
+import * as dotenv from "dotenv";
+dotenv.config()
 
+
+const PORT = process.env.PORT! || 5001
 const app:Express = express();
 app.use(express.json())
 

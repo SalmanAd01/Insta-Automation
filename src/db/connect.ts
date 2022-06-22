@@ -1,8 +1,9 @@
 import mongoose from "mongoose";
-import config from "config";
 import log from "../log";
+import { extractStringEnvVar } from "../public/dotenvExtractor";
 
-const mongooseUri:string = config.get('dbUri')
+const mongooseUri = extractStringEnvVar('DB_URI')
+console.log(mongooseUri)
 async function connectDb():Promise<void>{
     mongoose.connect(mongooseUri).then(()=>{
         log.info("Connected to Mongoose")
